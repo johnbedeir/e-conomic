@@ -70,6 +70,6 @@ echo "--------------------Installing AWS-CLI--------------------"
 sudo apt-get install zip -y
 sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip
 sudo ./aws/install
-#Retrive Jenkins Password
+#Reveal Jenkins Password
 echo "--------------------Jenkins Password--------------------"
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
