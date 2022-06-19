@@ -6,6 +6,45 @@ pipeline {
 	}
     stages {
 
+        stage('Deploy Grafana') {
+            steps {
+              // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
+                withCredentials([[
+                  $class: 'AmazonWebServicesCredentialsBinding',
+                  credentialsId: "aws-credentials",
+                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                  ]]) {
+                  sh """
+                  cd monitoring/k8s-grafana
+                  kubectl -n laravel-app apply -f grafana-datasource-config.yaml
+                  kubectl -n laravel-app apply -f deployment.yaml
+                  kubectl -n laravel-app apply -f service.yaml
+                  """
+                }
+            }
+        }
+
+        stage('Deploy Prometheus') {
+            steps {
+              // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
+                withCredentials([[
+                  $class: 'AmazonWebServicesCredentialsBinding',
+                  credentialsId: "aws-credentials",
+                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                  ]]) {
+                  sh """
+                  cd monitoring/k8s-prometheus
+                  kubectl -n laravel-app apply -f clusterRole.yaml
+                  kubectl -n laravel-app apply -f config-map.yaml
+                  kubectl -n laravel-app apply -f prometheus-deployment.yaml
+                  kubectl -n laravel-app apply -f prometheus-service.yaml
+                  """
+                }
+            }
+        }
+
         stage('Docker Login') {
             steps {
               sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
@@ -21,22 +60,22 @@ pipeline {
             }
         }
 
-        stage('Deploy App') {
-            steps {
-              // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
-                withCredentials([[
-                  $class: 'AmazonWebServicesCredentialsBinding',
-                  credentialsId: "aws-credentials",
-                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                  ]]) {
-                  sh """
-                  cd k8s
-                  kubectl -n laravel-app apply -f deployment.yaml
-                  kubectl -n laravel-app apply -f services.yaml
-                  """
-                }
-            }
-        }
+        // stage('Deploy App') {
+        //     steps {
+        //       // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
+        //         withCredentials([[
+        //           $class: 'AmazonWebServicesCredentialsBinding',
+        //           credentialsId: "aws-credentials",
+        //           accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+        //           secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+        //           ]]) {
+        //           sh """
+        //           cd k8s
+        //           kubectl -n laravel-app apply -f deployment.yaml
+        //           kubectl -n laravel-app apply -f services.yaml
+        //           """
+        //         }
+        //     }
+        // }
     }
 }
