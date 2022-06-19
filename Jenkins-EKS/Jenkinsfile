@@ -17,7 +17,7 @@ pipeline {
                   ]]) {
                   sh "eksctl delete cluster --name laravelapp-cluster --region eu-central-1"
                   sleep(time: 180, unit: "SECONDS")
-                }catch (err) {
+                }catchError (err) {
                 echo err.getMessage()
                 }  
             }
