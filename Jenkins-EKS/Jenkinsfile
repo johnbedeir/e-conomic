@@ -19,9 +19,9 @@ pipeline {
                   sleep(time: 180, unit: "SECONDS")
                 }
                 
-              catch (err){
-                echo "No cluster exist"
-              }  
+                catch (err){
+                  echo "No cluster exist"
+                }  
             }
         }
 
