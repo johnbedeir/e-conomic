@@ -19,7 +19,9 @@ pipeline {
                   sleep(time: 180, unit: "SECONDS")
                 }
                 
-                sh "exit 1"
+              catch (err){
+                echo "No cluster exist"
+              }  
             }
         }
 
