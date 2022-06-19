@@ -5,7 +5,7 @@ pipeline {
 
         stage('Delete Cluster') {
             steps {
-              catchError (err) {
+              catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
               // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
                 withCredentials([[
                   $class: 'AmazonWebServicesCredentialsBinding',
@@ -17,7 +17,7 @@ pipeline {
                   sleep(time: 180, unit: "SECONDS")
                 }
                 
-              echo err.getMessage()
+                sh "exit 1"
               }  
             }
         }
