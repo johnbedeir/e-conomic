@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-	}
     stages {
 
         stage('Delete Cluster') {
@@ -20,7 +17,7 @@ pipeline {
                   sleep(time: 180, unit: "SECONDS")
                 }
                 
-                echo err.getMessage()
+              echo err.getMessage()
               }  
             }
         }
