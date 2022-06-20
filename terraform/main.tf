@@ -7,5 +7,13 @@ resource "aws_instance" "ubuntu-instance" {
   tags  = {
     Name  = "Ubuntu-EC2"
   }
+
+  root_block_device {
+    volume_size           = "20"
+    volume_type           = "gp2"
+    encrypted             = true
+    delete_on_termination = true
+  }
 }
+
 
