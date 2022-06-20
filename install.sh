@@ -13,7 +13,7 @@ sudo apt-get install python3.8 -y
 #Install Pip
 echo "--------------------Installing Pip--------------------"
 sudo apt-get update -y
-sudo apt-get install python3-pip
+sudo apt-get install python3-pip -y 
 #Install Jenkins 
 echo "--------------------Installing Jenkins--------------------"
 sudo apt -y install wget
@@ -48,6 +48,9 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo chmod 666 /var/run/docker.sock
+echo "--------------------Installing EKS-CTL--------------------"
+sudo curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
 #Install Kubectl
 echo "----------"----------Installing Kubectl"--------------------"
 sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -70,6 +73,9 @@ echo "--------------------Installing AWS-CLI--------------------"
 sudo apt-get install zip -y
 sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip
 sudo ./aws/install
+#Start Minikube 
+echo "--------------------Start Minikube--------------------"
+minikube start
 #Reveal Jenkins Password
 echo "--------------------Jenkins Password--------------------"
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
