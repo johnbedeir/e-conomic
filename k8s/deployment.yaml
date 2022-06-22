@@ -1,0 +1,40 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: comingsoon-page-img-deployment 
+  namespace: laravel-app
+spec:
+  selector:
+    matchLabels:
+      app: comingsoon-page
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: comingsoon-page
+    spec:
+      containers:
+
+      - name: php-apache-environment
+        image: triple3a/laravel-app
+        ports:
+        - containerPort: 5000
+
+      - name: db
+        image: triple3a/laravel-app-mysql-5.7 
+        env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "1"
+            - name: MYSQL_DATABASE
+              value: laravel-db
+            - name: MYSQL_PASSWORD
+        ports:
+        - containerPort: 3306
+
+      - name: phpmyadmin
+        image: triple3a/laravel-app-phpmyadmin
+        env:
+            - name: MYSQL_USER
+              value: root
+        ports:
+        - containerPort: 4000
