@@ -6,25 +6,6 @@ pipeline {
 	}
     stages {
 
-        stage('Deploy Grafana') {
-            steps {
-              // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
-                withCredentials([[
-                  $class: 'AmazonWebServicesCredentialsBinding',
-                  credentialsId: "aws-credentials",
-                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                  ]]) {
-                  sh """
-                  cd monitoring/k8s-grafana
-                  kubectl -n laravel-app apply -f grafana-datasource-config.yaml
-                  kubectl -n laravel-app apply -f deployment.yaml
-                  kubectl -n laravel-app apply -f service.yaml
-                  """
-                }
-            }
-        }
-
         stage('Deploy Prometheus') {
             steps {
               // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
@@ -40,6 +21,25 @@ pipeline {
                   kubectl -n laravel-app apply -f config-map.yaml
                   kubectl -n laravel-app apply -f prometheus-deployment.yaml
                   kubectl -n laravel-app apply -f prometheus-service.yaml
+                  """
+                }
+            }
+        }
+        
+        stage('Deploy Grafana') {
+            steps {
+              // You will need to install CloudBees AWS Credentials Plugin in Jenkins and add AWS Credentials first 
+                withCredentials([[
+                  $class: 'AmazonWebServicesCredentialsBinding',
+                  credentialsId: "aws-credentials",
+                  accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                  ]]) {
+                  sh """
+                  cd monitoring/k8s-grafana
+                  kubectl -n laravel-app apply -f grafana-datasource-config.yaml
+                  kubectl -n laravel-app apply -f deployment.yaml
+                  kubectl -n laravel-app apply -f service.yaml
                   """
                 }
             }
