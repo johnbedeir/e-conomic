@@ -94,16 +94,16 @@ aws --version
 
 ### Step 6: Create 1st Jenkins job
 
-`This job is to run the jenkinsfile in Jenkins/Jenkins-EKS which will create the cluster and the namespace`
+This job is to run the jenkinsfile in [Jenkins/Jenkins-EKS](https://github.com/johnbedeir/e-conomic/tree/dev/Jenkins/Jenkins-Deploy) which will create the cluster and the namespace
 
 ---
 
 ### Step 7: Create 2nd Jenkins job
 
-`This job is to run the jenkinsfile in Jenkins/Jenkins-Deploy which will deploy monitoring and the microservice application`
+This job is to run the jenkinsfile in [Jenkins/Jenkins-Deploy](https://github.com/johnbedeir/e-conomic/tree/dev/Jenkins/Jenkins-EKS) which will deploy monitoring and the microservice application
 
 ---
 
 ### Step 8: Create 3nd Jenkins job
 
-`This job is to run the jenkinsfile in Jenkins/Jenkins-RM-EKS which will delete the created cluster`
+This job is to run the jenkinsfile in [Jenkins/Jenkins-RM-EKS](https://github.com/johnbedeir/e-conomic/tree/dev/Jenkins/Jenkins-RM-EKS) which will delete the created cluster
