@@ -1,13 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: comingsoon-page
+  name: webserver
+  labels:
+    run: webserver
   namespace: laravel-app
 spec:
   selector:
-    app: comingsoon-page
+    app: php-apache-environment
 # ClusterIP (default), LoadBalancer (works on cloud), NodePort (most used)
-  type: LoadBalancer
+  type: NodePort
   ports:
   - protocol: TCP
     port: 5000 

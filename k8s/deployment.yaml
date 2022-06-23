@@ -1,17 +1,19 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: comingsoon-page-img-deployment 
+  name: webserver-deployment
+  labels:
+    app: webserver
   namespace: laravel-app
 spec:
   selector:
     matchLabels:
-      app: comingsoon-page
+      app: webserver
   replicas: 3
   template:
     metadata:
       labels:
-        app: comingsoon-page
+        app: webserver
     spec:
       containers:
 
