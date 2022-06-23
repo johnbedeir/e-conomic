@@ -9,7 +9,8 @@ metadata:
 spec:
   selector: 
     app: grafana
-  type: NodePort  
+# ClusterIP (default), LoadBalancer (works on cloud), NodePort (most used)
+  type: LoadBalancer  
   ports:
     - port: 3000
       targetPort: 3000
