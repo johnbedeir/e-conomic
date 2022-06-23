@@ -8,7 +8,7 @@ This will create deployment for 3 pods with 3 containers using the following doc
 
 [triple3a/laravel-app-phpmyadmin](https://hub.docker.com/repository/docker/triple3a/laravel-app-phpmyadmin)
 
-That was created earlier using the following:
+The docker images that was created earlier using the following:
 
 [laravel-app/Dockerfile](https://github.com/johnbedeir/e-conomic/blob/dev/laravel-app/Dockerfile)
 
