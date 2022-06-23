@@ -36,7 +36,7 @@ $ terraform init
 $ terraforl apply -auto-approve
 ```
 
-### Step 2: Connect to the EC2 by SSH
+### Step 2: Connect to the EC2 using SSH
 
 ---
 
@@ -82,12 +82,30 @@ aws --version
 
 ---
 
-`Go to the browser the type the following then proceed with setting up jenkins`
+`Navigate to the browser and use the following to access jenkins then proceed with setting up jenkins`
 
 ---
 
 ```
 <public-ip>:8080
+```
+
+---
+
+### Step 6: Add Credentials for Dockerhub, Github and AWS
+
+`For AWS you will need to download the folloowing Plugin:` [CloudBees AWS Credentials](https://plugins.jenkins.io/aws-credentials/)
+
+Plugin:
+
+```
+Manage Jenkins > Manage Plugins > Available > CloudBees AWS Credentials
+```
+
+Add Credentials:
+
+```
+Manage Jenkins > Manage Credentials > global > Add Credentials
 ```
 
 ---
