@@ -10,7 +10,8 @@ metadata:
 spec:
   selector: 
     app: prometheus-server
-  type: NodePort  
+# ClusterIP (default), LoadBalancer (works on cloud), NodePort (most used)
+  type: LoadBalancer  
   ports:
     - port: 8089
       targetPort: 9090 
