@@ -16,11 +16,15 @@
 
 `To automate the build of the Dockerfile & the docker-compose.yml`
 
-### 4. Terraform:
+### 4. Kubernetes:
+
+`Deploy Microservice application that contains PHP, Apache, MySql, and PhpMyAdmin`
+
+### 5. Terraform:
 
 `To automate the infrastruction of building Jenkins EC2`
 
-### 5. Jenkinsfiles:
+### 6. Jenkinsfiles:
 
 `To automate creating the cluster`
 `To automate deploying the application`
