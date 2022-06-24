@@ -8,11 +8,9 @@
 
   - name: Create namespace
     command: kubectl create namespace laravel-app
-    ignore_errors: yes
   
   - name: Deploy frontend
     command: kubectl -n laravel-app apply -f frontend.yaml
-    ignore_errors: yes
 
   - name: Deploy database
     command: kubectl -n laravel-app apply -f db.yaml 
